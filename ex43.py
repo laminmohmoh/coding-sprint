@@ -12,11 +12,12 @@ class Scene(object):
 
 
 class Engine(object):
+
     def __init__(self, scene_map):
         self.scene_map = scene_map
 
     def play(self):
-        current_scene = self.scene_map.opening_scene()
+        current_scene= self.scene_map.opening_scene()
         last_scene = self.scene_map.next_scene('finished')
 
     while current_scene != last_scene:
@@ -60,8 +61,8 @@ class CentralCorridor(Scene):
 
         action = input("> ")
 
-    if action == "shoot!":
-        print(dedent("""
+        if action == "shoot!":
+            print(dedent("""
              Quick on the draw you yank out your blaster and fire
             it at the Gothon. His clown costume is flowing and
             moving around his body, which throws off your aim.
@@ -71,9 +72,10 @@ class CentralCorridor(Scene):
             and blast you repeatedly in the face until you are
             dead. Then he eats you.
             """))
-        return 'death'
-    elif action == "dodge!":
-        print(dedent("""
+            return 'death'
+
+        elif action == "dodge!":
+            print(dedent("""
                 Like a world class boxer you dodge, weave, slip and
                 slide right as the Gothon's blaster cranks a laser
                 past your head. In the middle of your artful dodge
@@ -81,10 +83,10 @@ class CentralCorridor(Scene):
                 wall and pass out. You wake up shortly after only to
                 die as the Gothon stomps on your head and eats you.
                 """))
-        return 'death'
+            return 'death'
 
-    elif action == "tell a joke":
-        print(dedent("""
+        elif action == "tell a joke":
+             print(dedent("""
                 Lucky for you they made you learn Gothon insults in
                 the academy. You tell the one Gothon joke you know:
                 Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr,
@@ -94,11 +96,11 @@ class CentralCorridor(Scene):
                 the head putting him down, then jump through the
                 Weapon Armory door.
                 """))
-        return 'laser_weapon_armory'
+             return 'laser_weapon_armory'
 
-    else:
-        print("DOES NOT COMPUTE!")
-    return 'central_corridor'
+        else:
+            print("DOES NOT COMPUTE!")
+            return 'central_corridor'
 
 
 class LaserWeaponArmory(Scene):
@@ -114,7 +116,7 @@ class LaserWeaponArmory(Scene):
             the lock closes forever and you can't get the bomb. The
             code is 3 digits.
             """))
-        code = f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"
+        code = "{randint(1,9)}{randint(1,9)}{randint(1,9)}"
         guess = input("[keypad]> ")
         guesses = 0
 
@@ -132,14 +134,14 @@ class LaserWeaponArmory(Scene):
                 """))
             return 'the_bridge'
 
-    else:
-    print(dedent("""
+        else:
+            print(dedent("""
                 The lock buzzes one last time and then you hear a
                 sickening melting sound as the mechanism is fused
                 together. You decide to sit there, and finally the
                 Gothons blow up the ship from their ship and you die.
                 """))
-    return 'death'
+            return 'death'
 
 
 class TheBridge(Scene):
@@ -156,8 +158,8 @@ class TheBridge(Scene):
 
         action = input(">")
 
-    if action == "throw the bomb":
-        print(dedent("""
+        if action == "throw the bomb":
+            print(dedent("""
                 In a panic you throw the bomb at the group of Gothons
                 and make a leap for the door. Right as you drop it a
                 Gothon shoots you right in the back killing you. As
@@ -165,11 +167,11 @@ class TheBridge(Scene):
                 disarm the bomb. You die knowing they will probably
                 blow up when it goes off.
                 """))
-        return 'death'
+            return 'death'
 
-    elif action == "slowly place the bomb":
-        print(dedent("""
-                You point your blaster at the bomb under your arm and
+        elif action == "slowly place the bomb":
+            print(dedent("""
+                    You point your blaster at the bomb under your arm and
                 the Gothons put their hands up and start to sweat.
                 You inch backward to the door, open it, and then
                 carefully place the bomb on the floor, pointing your
@@ -179,13 +181,14 @@ class TheBridge(Scene):
                 you run to the escape pod to get off this tin can.
                  """))
 
-        return 'escape_pod'
-    else:
-        print("DOES NOT COMPUTE!")
-        return "the_bridge"
+            return 'escape_pod'
+
+        else:
+            print("DOES NOT COMPUTE!")
+            return "the_bridge"
 
 
-class EscapPod(Scene):
+class EscapePod(Scene):
 
     def enter(self):
         print(dedent("""
@@ -201,16 +204,17 @@ class EscapPod(Scene):
         good_pod = randint(1, 5)
         guess = input("[pod #]> ")
 
-    if int(guess) != good_pod:
-        print(dedent("""
+        if int(guess) != good_pod:
+            print(dedent("""
             You jump into pod {guess} and hit the eject button.
             The pod escapes out into the void of space, then
             implodes as the hull ruptures, crushing your body into
             jam jelly.
             """))
-        return 'death'
-    else:
-        print(dedent("""
+            return 'death'
+
+        else:
+            print(dedent("""
             You jump into pod {guess} and hit the eject button.
             The pod easily slides out into space heading to the
             planet below. As it flies to the planet, you look
@@ -218,8 +222,7 @@ class EscapPod(Scene):
             bright star, taking out the Gothon ship at the same
             time. You won!
             """))
-
-        return 'finished'
+            return 'finished'
 
 
 class Finished(Scene):
@@ -242,7 +245,8 @@ class Map(object):
     def __init__(self, start_scene):
         self.start_scene = start_scene
 
-    def next_scene(self, scene_name):
+    @staticmethod
+    def next_scene(scene_name):
         val = Map.scenes.get(scene_name)
         return val
 
