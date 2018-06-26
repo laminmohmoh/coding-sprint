@@ -32,7 +32,7 @@ def bear_room():
             bear_moved= True
 
         elif next== "taunt bear" and bear_moved:
-        dead("The bear gets pissed off and chews your leg off.")
+            dead("The bear gets pissed off and chews your leg off.")
         elif next== "open door " and bear_moved:
             gold_room()
         else:
@@ -58,14 +58,14 @@ def dead(why):
 
 def start():
     print("Your are in a dark room.")
-    print("There is a door to your ringht and left.")
+    print("There is a door to your right and left.")
     print("Which one do you take?")
 
     next=input(">")
 
     if next== "left":
         bear_room()
-    elif next=="ringt:"
+    elif next=="ring:":
         cthulhu_room()
     else:
         dead("You stumble around the room until you stare.")
